@@ -60,9 +60,9 @@ public abstract class EnemyScript : MonoBehaviour
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
-    public void GetDamaged()
+    public void GetDamaged(float damageTaken)
     {
-        currentHealth -= 1.0f;
+        currentHealth -= damageTaken;
         if (currentHealth <= 0)
         {
             Debug.Log("Enemy destroyed");

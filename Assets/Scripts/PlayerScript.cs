@@ -11,7 +11,7 @@ public class PlayerScript : MonoBehaviour
     private Vector2 direction;
     private bool isFacingRight;
     private bool canRun;
-    public float runSpeed = 1.0f;
+    public float runSpeed = 4.0f;
 
     private bool canDashJumpUp;
     private bool canDashJumpDown;
@@ -20,8 +20,14 @@ public class PlayerScript : MonoBehaviour
     private int currStageLevel;
     public float dashDistance = 2.64f;
 
+    public float shootDuration = 1.0f;
+    private float currentShootTime;
+    public Transform firePos;
+    public GameObject bullet;
+
     public float startingHealth = 10.0f;
     private float currentHealth;
+    public float playerDamage = 1.0f;
 
     private GameManagerScript gameManagerScript;
     public bool isGameOver;
@@ -40,6 +46,8 @@ public class PlayerScript : MonoBehaviour
         isFacingRight = true;
         canRun = true;
 
+        currentShootTime = 0.0f;
+
         canDashJumpUp = false;
         canDashJumpDown = false;
         stageLevelMin = 0;
@@ -52,17 +60,17 @@ public class PlayerScript : MonoBehaviour
     {
         CheckRun();
         CheckDashJump();
-        // HelperStopAndFlip();
+        HelperStopAndFlip();
     }
 
-    // private void HelperStopAndFlip()
-    // {
-    //     if(Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         rb2d.velocity = Vector2.zero;
-    //         canRun=false;
-    //     }
-    // }
+    private void HelperStopAndFlip()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            rb2d.velocity = Vector2.zero;
+            canRun=false;
+        }
+    }
 
     private void CheckRun()
     {
@@ -121,6 +129,7 @@ public class PlayerScript : MonoBehaviour
             if (canRun)
             {
                 Run();
+                Shoot();
             }
         }
     }
@@ -128,6 +137,18 @@ public class PlayerScript : MonoBehaviour
     private void Run()
     {
         rb2d.MovePosition((Vector2)transform.position + direction * runSpeed * Time.deltaTime);
+    }
+
+    private void Shoot()
+    {
+        if (currentShootTime <= 0)
+        {
+            Instantiate(bullet, firePos.position, firePos.rotation);
+            currentShootTime = shootDuration;
+        } else 
+        {
+            currentShootTime -= Time.deltaTime;
+        }
     }
 
     private void DashJumpUp()
@@ -155,7 +176,7 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("Hit Enemy");
             Enemy00Script enemy = hit.GetComponent<Enemy00Script>();
             TakeDamage(enemy.damageDealt);
-            enemy.GetDamaged();
+            enemy.GetDamaged(playerDamage);
         }
         if (hit.gameObject.tag == "Item")
         {
