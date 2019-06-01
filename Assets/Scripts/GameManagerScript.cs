@@ -8,7 +8,7 @@ public class GameManagerScript : MonoBehaviour
 {
     private Image hpBar;
     private GameObject gameOverPanel;
-    private int score;
+    public int score;
     public Text scoreText;
     public Text bestText;
     public Text yourText;
@@ -58,7 +58,6 @@ public class GameManagerScript : MonoBehaviour
 
     void GameOver()
     {
-        // scoreText.gameObject.SetActive(false);
         if(score > PlayerPrefs.GetInt("Best", 0))
         {
             PlayerPrefs.SetInt("Best", score);

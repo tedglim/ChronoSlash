@@ -5,7 +5,6 @@ using UnityEngine;
 public class Enemy00Script : EnemyScript
 {
     private float currentPatrolTime;
-    // private float patrolSpeed;
     // Update is called once per frame
     void Awake()
     {

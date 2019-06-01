@@ -31,6 +31,7 @@ public class PlayerScript : MonoBehaviour
 
     private GameManagerScript gameManagerScript;
     public bool isGameOver;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -192,5 +193,18 @@ public class PlayerScript : MonoBehaviour
     {
         currentHealth -= damageTaken;
         gameManagerScript.ManagePlayerHealth(currentHealth, startingHealth);
+    }
+
+    private void Blast()
+    {
+        // if (gameManagerScript.score > )
+        //if score > certain scaling amount
+        //can use ability is true
+        //if player taps button
+        //ability is used
+        //can use ability is false
+        //scale amount increases
+        //otherwise 
+        //can use ability bool expires with time.
     }
 }

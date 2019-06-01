@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class EnemyScript : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public abstract class EnemyScript : MonoBehaviour
     public float damageDealt;
     public GameObject item;
 
+    public Image hp;
+    public Image bar;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +35,8 @@ public abstract class EnemyScript : MonoBehaviour
         patrolSpeed = UnityEngine.Random.Range(patrolSpeedMin, patrolSpeedMax);
         patrolDuration = UnityEngine.Random.Range(patrolDurationMin, patrolDurationMax);
         currentHealth = totalHealth;
+        hp.enabled = false;
+        bar.enabled = false;
     }
 
     protected virtual void InitDirection()
@@ -64,6 +70,9 @@ public abstract class EnemyScript : MonoBehaviour
     public void GetDamaged(float damageTaken)
     {
         currentHealth -= damageTaken;
+        hp.fillAmount = currentHealth/totalHealth;
+        hp.enabled = true;
+        bar.enabled = true;
         if (currentHealth <= 0)
         {
             Debug.Log("Enemy destroyed");

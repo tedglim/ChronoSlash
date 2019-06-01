@@ -43,19 +43,6 @@ public class EnemySpawnScript : MonoBehaviour
         if (currentSpawnTime <= 0.0f)
         {
             StartCoroutine(makeEnemy());
-            // if(enemiesAlive < maxEnemiesAlive)
-            // {
-            //     int rand = UnityEngine.Random.Range(0,enemyTypes.Length);
-            //     if (rand == 0)
-            //     {
-            //         newEnemy = Instantiate(enemyTypes[rand], spawnLocations[UnityEngine.Random.Range(0,spawnLocations.Length)].position, Quaternion.identity);
-            //     } else 
-            //     {
-            //         newEnemy = Instantiate(enemyTypes[rand], spawnLocations[UnityEngine.Random.Range(0,spawnLocations.Length)].position + enemy01Offset, Quaternion.identity);
-            //     }
-            //     newEnemy.transform.parent = transform;
-            // }
-            // currentSpawnTime = spawnIntervalDuration;
         } else
         {
             currentSpawnTime -= Time.deltaTime;
@@ -122,6 +109,14 @@ public class EnemySpawnScript : MonoBehaviour
             unique.Add(rand);
             newEnemy = Instantiate(enemy00, spawnLocations[rand].position, Quaternion.identity);
             newEnemy.transform.parent = transform;
+        }
+    }
+
+    private void DestroyAllEnemies()
+    {
+        foreach (Transform child in transform)
+        {
+            DestroyImmediate(child.gameObject);
         }
     }
 }
