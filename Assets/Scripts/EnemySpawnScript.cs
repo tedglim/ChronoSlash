@@ -8,6 +8,7 @@ public class EnemySpawnScript : MonoBehaviour
     private Transform[] spawnLocations;
     public float initSpawnNum = 2;
     public GameObject[] enemyTypes;
+    public GameObject[] enemyEntryTypes;
     public float spawnIntervalDuration = 2.0f;
     private float currentSpawnTime;
     private int enemiesAlive;
@@ -39,25 +40,51 @@ public class EnemySpawnScript : MonoBehaviour
 
     private void SpawnEnemies()
     {
-        GameObject newEnemy;
         if (currentSpawnTime <= 0.0f)
         {
-            if(enemiesAlive < maxEnemiesAlive)
-            {
-                int rand = UnityEngine.Random.Range(0,enemyTypes.Length);
-                if (rand == 0)
-                {
-                newEnemy = Instantiate(enemyTypes[rand], spawnLocations[UnityEngine.Random.Range(0,spawnLocations.Length)].position, Quaternion.identity);
-                } else 
-                {
-                    newEnemy = Instantiate(enemyTypes[rand], spawnLocations[UnityEngine.Random.Range(0,spawnLocations.Length)].position + enemy01Offset, Quaternion.identity);
-                }
-                newEnemy.transform.parent = transform;
-            }
-            currentSpawnTime = spawnIntervalDuration;
+            StartCoroutine(makeEnemy());
+            // if(enemiesAlive < maxEnemiesAlive)
+            // {
+            //     int rand = UnityEngine.Random.Range(0,enemyTypes.Length);
+            //     if (rand == 0)
+            //     {
+            //         newEnemy = Instantiate(enemyTypes[rand], spawnLocations[UnityEngine.Random.Range(0,spawnLocations.Length)].position, Quaternion.identity);
+            //     } else 
+            //     {
+            //         newEnemy = Instantiate(enemyTypes[rand], spawnLocations[UnityEngine.Random.Range(0,spawnLocations.Length)].position + enemy01Offset, Quaternion.identity);
+            //     }
+            //     newEnemy.transform.parent = transform;
+            // }
+            // currentSpawnTime = spawnIntervalDuration;
         } else
         {
             currentSpawnTime -= Time.deltaTime;
+        }
+    }
+
+    private IEnumerator makeEnemy ()
+    {
+        GameObject newEnemy;
+        GameObject entryEffect;
+        currentSpawnTime = spawnIntervalDuration;
+        if(enemiesAlive < maxEnemiesAlive)
+        {
+            int randEnemy = UnityEngine.Random.Range(0,enemyTypes.Length);
+            int randSpawnLoc = UnityEngine.Random.Range(0,spawnLocations.Length);
+            if (randEnemy == 0)
+            {
+                entryEffect = Instantiate(enemyEntryTypes[randEnemy], spawnLocations[randSpawnLoc].position, Quaternion.identity);
+                yield return new WaitForSeconds(1.0f);
+                Destroy(entryEffect);
+                newEnemy = Instantiate(enemyTypes[randEnemy], spawnLocations[randSpawnLoc].position, Quaternion.identity);
+            } else 
+            {
+                entryEffect = Instantiate(enemyEntryTypes[randEnemy], spawnLocations[randSpawnLoc].position, Quaternion.identity);
+                yield return new WaitForSeconds(1.0f);
+                Destroy(entryEffect);
+                newEnemy = Instantiate(enemyTypes[randEnemy], spawnLocations[randSpawnLoc].position + enemy01Offset, Quaternion.identity);
+            }
+            newEnemy.transform.parent = transform;
         }
     }
 

@@ -2852,6 +2852,9 @@ MonoBehaviour:
   enemyTypes:
   - {fileID: 2639806094303926389, guid: d66b94aa8d642485b80ce8ed713fe546, type: 3}
   - {fileID: 7224065578926072281, guid: 02a824e3b2ac9448c9ae8d4e6cde378a, type: 3}
+  enemyEntryTypes:
+  - {fileID: 1199655555294366351, guid: 55814e4ed8753417b9994338ca890245, type: 3}
+  - {fileID: 7123292188882032828, guid: 4bfb28519afb9454a9fbf5dd40361525, type: 3}
   spawnIntervalDuration: 2
   maxEnemiesAlive: 10
   isGameOver: 0

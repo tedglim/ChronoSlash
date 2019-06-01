@@ -30,6 +30,7 @@ public abstract class EnemyScript : MonoBehaviour
         InitDirection();
         patrolSpeed = UnityEngine.Random.Range(patrolSpeedMin, patrolSpeedMax);
         patrolDuration = UnityEngine.Random.Range(patrolDurationMin, patrolDurationMax);
+        currentHealth = totalHealth;
     }
 
     protected virtual void InitDirection()
