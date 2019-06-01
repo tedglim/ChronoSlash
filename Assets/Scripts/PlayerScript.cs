@@ -30,8 +30,16 @@ public class PlayerScript : MonoBehaviour
     public float playerDamage = 1.0f;
 
     private GameManagerScript gameManagerScript;
+    private EnemySpawnScript enemySpawnScript;
     public bool isGameOver;
     
+    public float scoreForAbility = 20.0f;
+    private float prevScoreForAbility;
+    private float currAbilityAmount;
+    public float useAbilityDuration = 5.0f;
+    private float canUseAbilityTime;
+    private bool canUseAbility;
+    public float abilityDamage = 10.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +48,8 @@ public class PlayerScript : MonoBehaviour
         currentHealth = startingHealth;
         GameObject gameManager = GameObject.Find("GameManager");
         gameManagerScript = gameManager.GetComponent<GameManagerScript>();
+        GameObject enemySpawner = GameObject.Find("EnemySpawner");
+        enemySpawnScript = enemySpawner.GetComponent<EnemySpawnScript>();
         isGameOver = false;
         
         //auto run right
@@ -54,6 +64,11 @@ public class PlayerScript : MonoBehaviour
         stageLevelMin = 0;
         stageLevelMax = 2;
         currStageLevel = stageLevelMin;
+
+        prevScoreForAbility = 0.0f;
+        currAbilityAmount = gameManagerScript.score - prevScoreForAbility;
+        canUseAbilityTime = useAbilityDuration;
+        canUseAbility = false;
     }
 
     // Update is called once per frame
@@ -61,17 +76,18 @@ public class PlayerScript : MonoBehaviour
     {
         CheckRun();
         CheckDashJump();
-        HelperStopAndFlip();
+        CheckBlast();
+        // HelperStopAndFlip();
     }
 
-    private void HelperStopAndFlip()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            rb2d.velocity = Vector2.zero;
-            canRun=false;
-        }
-    }
+    // private void HelperStopAndFlip()
+    // {
+    //     if(Input.GetKeyDown(KeyCode.Space))
+    //     {
+    //         rb2d.velocity = Vector2.zero;
+    //         canRun=false;
+    //     }
+    // }
 
     private void CheckRun()
     {
@@ -116,6 +132,36 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private void CheckBlast()
+    {
+        if (currAbilityAmount >= scoreForAbility)
+        {
+            if (canUseAbilityTime <= 0)
+            {
+                canUseAbility = false;
+                ResetBlastReqs();
+            } else {
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    canUseAbility = true;
+                } else
+                {
+                    canUseAbilityTime -= Time.deltaTime;
+                }
+            }
+        } else {
+            canUseAbility = false;
+            currAbilityAmount = gameManagerScript.score - prevScoreForAbility;
+            gameManagerScript.ManageAbilityBar(canUseAbility, currAbilityAmount, scoreForAbility);
+        }
+    }
+
+    private void ResetBlastReqs()
+    {
+        prevScoreForAbility += scoreForAbility;
+        currAbilityAmount = gameManagerScript.score - prevScoreForAbility;
+        canUseAbilityTime = useAbilityDuration;    }
+
     void FixedUpdate()
     {
         if(!isGameOver)
@@ -126,6 +172,9 @@ public class PlayerScript : MonoBehaviour
             } else if (canDashJumpDown)
             {
                 DashJumpDown();
+            } else if (canUseAbility)
+            {
+                Blast();
             }
             if (canRun)
             {
@@ -164,6 +213,13 @@ public class PlayerScript : MonoBehaviour
         canDashJumpDown = false;
     }
 
+    private void Blast()
+    {
+        enemySpawnScript.DestroyAllEnemies(abilityDamage);
+        ResetBlastReqs();
+        canUseAbility = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D hit)
     {
         if (hit.gameObject.tag == "StageWall")
@@ -193,18 +249,5 @@ public class PlayerScript : MonoBehaviour
     {
         currentHealth -= damageTaken;
         gameManagerScript.ManagePlayerHealth(currentHealth, startingHealth);
-    }
-
-    private void Blast()
-    {
-        // if (gameManagerScript.score > )
-        //if score > certain scaling amount
-        //can use ability is true
-        //if player taps button
-        //ability is used
-        //can use ability is false
-        //scale amount increases
-        //otherwise 
-        //can use ability bool expires with time.
     }
 }

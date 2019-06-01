@@ -17,6 +17,7 @@ public class EnemySpawnScript : MonoBehaviour
     public bool isGameOver;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,7 +79,7 @@ public class EnemySpawnScript : MonoBehaviour
     private void GetEnemiesAlive()
     {
         enemiesAlive = transform.childCount;
-        Debug.Log("Enemies alive: " + enemiesAlive);
+        // Debug.Log("Enemies alive: " + enemiesAlive);
     }
 
     private void GetSpawnLocations()
@@ -112,11 +113,13 @@ public class EnemySpawnScript : MonoBehaviour
         }
     }
 
-    private void DestroyAllEnemies()
+    public void DestroyAllEnemies(float damageDealt)
     {
         foreach (Transform child in transform)
         {
-            DestroyImmediate(child.gameObject);
+            Debug.Log("Destroy");
+            child.gameObject.GetComponent<Enemy00Script>().GetDamaged(damageDealt);
+            // Destroy(child.gameObject);
         }
     }
 }

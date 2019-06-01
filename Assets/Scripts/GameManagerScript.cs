@@ -6,13 +6,17 @@ using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
-    private Image hpBar;
+
     private GameObject gameOverPanel;
     public int score;
     public Text scoreText;
     public Text bestText;
     public Text yourText;
     public bool isGameOver;
+
+    private Image hpBar;
+    private Image abilityBar;
+
     private EnemySpawnScript enemySpawnScript;
     private PlayerScript playerScript;
 
@@ -21,6 +25,8 @@ public class GameManagerScript : MonoBehaviour
     {
         GameObject health = GameObject.Find("GameManager/Canvas/Healthbar/Health");
         hpBar = health.GetComponent<Image>();
+        GameObject ability = GameObject.Find("GameManager/Canvas/AbilityBar/Charge");
+        abilityBar = ability.GetComponent<Image>();
         gameOverPanel = GameObject.Find("GameManager/Canvas/GameOverPanel");
         GameObject spawner = GameObject.Find("EnemySpawner");
         enemySpawnScript = spawner.GetComponent<EnemySpawnScript>();
@@ -56,6 +62,16 @@ public class GameManagerScript : MonoBehaviour
         hpBar.fillAmount = currHealth / totalHealth;
     }
 
+    public void ManageAbilityBar(bool canUseAbility, float currAbilityAmount, float scoreForAbility)
+    {
+        if(canUseAbility)
+        {
+            abilityBar.fillAmount = 1;
+        } else {
+            abilityBar.fillAmount = currAbilityAmount / scoreForAbility;
+        }
+    }
+
     void GameOver()
     {
         if(score > PlayerPrefs.GetInt("Best", 0))
@@ -68,6 +84,7 @@ public class GameManagerScript : MonoBehaviour
         playerScript.isGameOver = true;
         isGameOver = true;
         gameOverPanel.SetActive(true);
+        abilityBar.fillAmount = 0;
     }
 
     public void PlayAgain()
