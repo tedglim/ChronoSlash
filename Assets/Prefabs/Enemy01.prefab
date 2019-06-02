@@ -317,8 +317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9368c76d30d94afe8b025489244f371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolDurationMin: 3
-  patrolDurationMax: 2
+  patrolDurationMin: 2
+  patrolDurationMax: 1
   patrolSpeedMin: 0.25
   patrolSpeedMax: 0.5
   totalHealth: 5

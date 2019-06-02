@@ -145,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolDurationMin: 1.5
   patrolDurationMax: 2.5
-  patrolSpeedMin: 0.25
+  patrolSpeedMin: 0.5
   patrolSpeedMax: 1
   totalHealth: 1
   damageDealt: 1

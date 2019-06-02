@@ -15,6 +15,7 @@ public class EnemySpawnScript : MonoBehaviour
     public int maxEnemiesAlive = 10;
     private Vector3 enemy01Offset;
     public bool isGameOver;
+    public float entryTime = 2.0f;
 
 
 
@@ -62,13 +63,13 @@ public class EnemySpawnScript : MonoBehaviour
             if (randEnemy == 0)
             {
                 entryEffect = Instantiate(enemyEntryTypes[randEnemy], spawnLocations[randSpawnLoc].position, Quaternion.identity);
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(entryTime);
                 Destroy(entryEffect);
                 newEnemy = Instantiate(enemyTypes[randEnemy], spawnLocations[randSpawnLoc].position, Quaternion.identity);
             } else 
             {
                 entryEffect = Instantiate(enemyEntryTypes[randEnemy], spawnLocations[randSpawnLoc].position, Quaternion.identity);
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(entryTime);
                 Destroy(entryEffect);
                 newEnemy = Instantiate(enemyTypes[randEnemy], spawnLocations[randSpawnLoc].position + enemy01Offset, Quaternion.identity);
             }
@@ -102,10 +103,10 @@ public class EnemySpawnScript : MonoBehaviour
         for (int i = 0; i < initSpawnNum; i++)
         {
             
-            int rand = UnityEngine.Random.Range(0, spawnLocations.Length - 1);
+            int rand = UnityEngine.Random.Range(3, spawnLocations.Length);
             while (unique.Contains(rand))
             {
-                rand = UnityEngine.Random.Range(0, spawnLocations.Length - 1);
+                rand = UnityEngine.Random.Range(3, spawnLocations.Length);
             }
             unique.Add(rand);
             newEnemy = Instantiate(enemy00, spawnLocations[rand].position, Quaternion.identity);

@@ -3278,6 +3278,7 @@ MonoBehaviour:
   spawnIntervalDuration: 2
   maxEnemiesAlive: 10
   isGameOver: 0
+  entryTime: 1.5
 --- !u!4 &595162700966468395
 Transform:
   m_ObjectHideFlags: 0
@@ -3662,9 +3663,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee009d2487b6d459d9a66491d6994567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 3
+  runSpeed: 3.5
   dashDistance: 2
-  shootDuration: 0.25
+  shootDuration: 0.15
   firePos: {fileID: 8951111453884019299}
   bullet: {fileID: 7109563082368272186, guid: 08212b52f68b4468ea585e1a81d6cf3f, type: 3}
   startingHealth: 10
