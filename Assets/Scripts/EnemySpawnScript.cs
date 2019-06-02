@@ -77,6 +77,28 @@ public class EnemySpawnScript : MonoBehaviour
         }
     }
 
+    private void DistributeEnemies()
+    {
+        //while true
+        //randomize
+        //if rand <=2 and count1 + 1 <=4
+        //count1 ++
+        //return rand
+        //if rand <=5 and count2 + 1 <=4
+        //count2 ++
+        //return rand
+        //if rand <=8 and count3 + 1 <=4
+        //count3 ++
+        //return rand
+    }
+    //add newEnemy.group = rand
+    //if group <=2
+    //count1--
+    //if group <=5
+    //count2--
+    //if group <=8
+    //count3--
+
     private void GetEnemiesAlive()
     {
         enemiesAlive = transform.childCount;
