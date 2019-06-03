@@ -17,7 +17,9 @@ public class EnemySpawnScript : MonoBehaviour
     public bool isGameOver;
     public float entryTime = 2.0f;
 
-
+    public int group1 = 0;
+    public int group2 = 0;
+    public int group3 = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +61,7 @@ public class EnemySpawnScript : MonoBehaviour
         if(enemiesAlive < maxEnemiesAlive)
         {
             int randEnemy = UnityEngine.Random.Range(0,enemyTypes.Length);
-            int randSpawnLoc = UnityEngine.Random.Range(0,spawnLocations.Length);
+            int randSpawnLoc = DistributeEnemies();
             if (randEnemy == 0)
             {
                 entryEffect = Instantiate(enemyEntryTypes[randEnemy], spawnLocations[randSpawnLoc].position, Quaternion.identity);
@@ -74,35 +76,49 @@ public class EnemySpawnScript : MonoBehaviour
                 newEnemy = Instantiate(enemyTypes[randEnemy], spawnLocations[randSpawnLoc].position + enemy01Offset, Quaternion.identity);
             }
             newEnemy.transform.parent = transform;
+            if (randSpawnLoc <= 2)
+            {
+                newEnemy.GetComponent<EnemyScript>().group = 1;
+                group1++;
+                Debug.Log("Group 1: " + group1);
+            } else if (randSpawnLoc >=3 && randSpawnLoc <= 5)
+            {
+                newEnemy.GetComponent<EnemyScript>().group = 2;
+                group2++;
+                Debug.Log("Group 2: " + group2);
+            } else if (randSpawnLoc >= 6)
+            {
+                newEnemy.GetComponent<EnemyScript>().group = 3;
+                group3++;
+                Debug.Log("Group 3: " + group3);
+            }
         }
     }
 
-    private void DistributeEnemies()
+    private int DistributeEnemies()
     {
-        //while true
-        //randomize
-        //if rand <=2 and count1 + 1 <=4
-        //count1 ++
-        //return rand
-        //if rand <=5 and count2 + 1 <=4
-        //count2 ++
-        //return rand
-        //if rand <=8 and count3 + 1 <=4
-        //count3 ++
-        //return rand
+        while (true)
+        {
+            int rand = UnityEngine.Random.Range(0,spawnLocations.Length);
+            if (rand <= 2 && group1 + 1 <= 4)
+            {
+                return rand;
+            } else if (rand >=3 && rand <= 5 && group2 + 1 <= 4)
+            {
+                return rand;
+            } else if (rand >=6 && group3 + 1 <= 4)
+            {
+                return rand;
+            } else {
+                Debug.Log("reRandomize");
+            }
+        }
     }
-    //add newEnemy.group = rand
-    //if group <=2
-    //count1--
-    //if group <=5
-    //count2--
-    //if group <=8
-    //count3--
+
 
     private void GetEnemiesAlive()
     {
         enemiesAlive = transform.childCount;
-        // Debug.Log("Enemies alive: " + enemiesAlive);
     }
 
     private void GetSpawnLocations()
@@ -133,6 +149,15 @@ public class EnemySpawnScript : MonoBehaviour
             unique.Add(rand);
             newEnemy = Instantiate(enemy00, spawnLocations[rand].position, Quaternion.identity);
             newEnemy.transform.parent = transform;
+            if (rand <= 5)
+            {
+                newEnemy.GetComponent<EnemyScript>().group = 2;
+                group2++;
+            } else if (rand <= 8)
+            {
+                newEnemy.GetComponent<EnemyScript>().group = 3;
+                group3++;
+            }
         }
     }
 

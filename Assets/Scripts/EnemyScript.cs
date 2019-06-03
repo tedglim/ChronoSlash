@@ -26,6 +26,8 @@ public abstract class EnemyScript : MonoBehaviour
     public Image hp;
     public Image bar;
 
+    public int group;
+    private EnemySpawnScript enemySpawnScript;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +39,9 @@ public abstract class EnemyScript : MonoBehaviour
         currentHealth = totalHealth;
         hp.enabled = false;
         bar.enabled = false;
+
+        GameObject enemySpawner = GameObject.Find("EnemySpawner");
+        enemySpawnScript = enemySpawner.GetComponent<EnemySpawnScript>();
     }
 
     protected virtual void InitDirection()
@@ -77,6 +82,16 @@ public abstract class EnemyScript : MonoBehaviour
         {
             Debug.Log("Enemy destroyed");
             Instantiate(item, transform.position, Quaternion.identity);
+            if (group == 1)
+            {
+                enemySpawnScript.group1--;
+            } else if (group == 2)
+            {
+                enemySpawnScript.group2--;
+            } else if (group == 3)
+            {
+                enemySpawnScript.group3--;
+            }
             Destroy(gameObject);
         }
     }
