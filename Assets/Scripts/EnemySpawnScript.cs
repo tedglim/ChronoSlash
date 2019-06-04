@@ -21,6 +21,8 @@ public class EnemySpawnScript : MonoBehaviour
     public int group2 = 0;
     public int group3 = 0;
 
+    private GameManagerScript gameManagerScript;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,8 @@ public class EnemySpawnScript : MonoBehaviour
         currentSpawnTime = spawnIntervalDuration;
         enemy01Offset = new Vector3 (0.0f, .25f, 0.0f);
         isGameOver = false;
+        GameObject gameManager = GameObject.Find("GameManager");
+        gameManagerScript = gameManager.GetComponent<GameManagerScript>();
     }
 
     // Update is called once per frame
@@ -46,7 +50,17 @@ public class EnemySpawnScript : MonoBehaviour
     {
         if (currentSpawnTime <= 0.0f)
         {
-            StartCoroutine(makeEnemy());
+                StartCoroutine(makeEnemy());
+            if (gameManagerScript.score >= 150)
+            {
+                StartCoroutine(makeEnemy());
+            } else if (gameManagerScript.score >= 60)
+            {
+                if (UnityEngine.Random.Range(0, 2) == 0)
+                {
+                    StartCoroutine(makeEnemy());
+                }
+            }
         } else
         {
             currentSpawnTime -= Time.deltaTime;
@@ -61,6 +75,16 @@ public class EnemySpawnScript : MonoBehaviour
         if(enemiesAlive < maxEnemiesAlive)
         {
             int randEnemy = UnityEngine.Random.Range(0,enemyTypes.Length);
+            if (gameManagerScript.score >= 180 && randEnemy == 0)
+            {
+                randEnemy = UnityEngine.Random.Range(0,enemyTypes.Length);
+            } else if (gameManagerScript.score >= 150 && randEnemy == 1)
+            {
+                randEnemy = 0;
+            } else if (gameManagerScript.score >= 30 && randEnemy == 0)
+            {
+                randEnemy = UnityEngine.Random.Range(0,enemyTypes.Length);
+            }
             int randSpawnLoc = DistributeEnemies();
             if (randEnemy == 0)
             {
@@ -100,13 +124,13 @@ public class EnemySpawnScript : MonoBehaviour
         while (true)
         {
             int rand = UnityEngine.Random.Range(0,spawnLocations.Length);
-            if (rand <= 2 && group1 + 1 <= 4)
+            if (rand <= 2 && group1 + 2 <= 4)
             {
                 return rand;
-            } else if (rand >=3 && rand <= 5 && group2 + 1 <= 4)
+            } else if (rand >=3 && rand <= 5 && group2 + 2 <= 4)
             {
                 return rand;
-            } else if (rand >=6 && group3 + 1 <= 4)
+            } else if (rand >=6 && group3 + 2 <= 4)
             {
                 return rand;
             } else {
