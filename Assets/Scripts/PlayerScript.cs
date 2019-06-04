@@ -11,16 +11,16 @@ public class PlayerScript : MonoBehaviour
     private Vector2 direction;
     private bool isFacingRight;
     private bool canRun;
-    public float runSpeed = 4.0f;
+    public float runSpeed = 3.5f;
 
     private bool canDashJumpUp;
     private bool canDashJumpDown;
     private int stageLevelMin;
     private int stageLevelMax;
     private int currStageLevel;
-    public float dashDistance = 2.64f;
+    public float dashDistance = 2.0f;
 
-    public float shootDuration = 1.0f;
+    public float shootDuration = .15f;
     private float currentShootTime;
     public Transform firePos;
     public GameObject bullet;
@@ -33,12 +33,13 @@ public class PlayerScript : MonoBehaviour
     private EnemySpawnScript enemySpawnScript;
     public bool isGameOver;
     
-    public float scoreForAbility = 20.0f;
+    public float scoreForAbility = 30.0f;
     private float prevScoreForAbility;
     private float currAbilityAmount;
     public float useAbilityDuration = 5.0f;
     private float canUseAbilityTime;
     private bool canUseAbility;
+
     public float abilityDamage = 10.0f;
 
     // Start is called before the first frame update
@@ -77,17 +78,7 @@ public class PlayerScript : MonoBehaviour
         CheckRun();
         CheckDashJump();
         CheckBlast();
-        // HelperStopAndFlip();
     }
-
-    // private void HelperStopAndFlip()
-    // {
-    //     if(Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         rb2d.velocity = Vector2.zero;
-    //         canRun=false;
-    //     }
-    // }
 
     private void CheckRun()
     {
@@ -224,22 +215,21 @@ public class PlayerScript : MonoBehaviour
     {
         if (hit.gameObject.tag == "StageWall")
         {
-            Debug.Log("Hit Wall");
+            // Debug.Log("Hit Wall");
             rb2d.velocity = Vector2.zero;
             canRun=false;
         }
         if (hit.gameObject.tag == "Enemy00")
         {
-            Debug.Log("Hit Enemy");
+            // Debug.Log("Hit Enemy");
             Enemy00Script enemy = hit.GetComponent<Enemy00Script>();
             TakeDamage(enemy.damageDealt);
             enemy.GetDamaged(playerDamage);
         }
         if (hit.gameObject.tag == "Item")
         {
-            Debug.Log("Hit Item");
+            // Debug.Log("Hit Item");
             ItemScript item = hit.GetComponent<ItemScript>();
-
             gameManagerScript.AddScore(item.value);
             item.GetDestroyed();
         }

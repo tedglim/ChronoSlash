@@ -36,12 +36,6 @@ public class GameManagerScript : MonoBehaviour
         score = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void AddScore(int value)
     {
         if(!isGameOver)
@@ -56,7 +50,7 @@ public class GameManagerScript : MonoBehaviour
         Debug.Log("current Health: " + currHealth);
         if (currHealth <= 0)
         {
-            Debug.Log("DEAD");
+            // Debug.Log("DEAD");
             GameOver();
         }
         hpBar.fillAmount = currHealth / totalHealth;

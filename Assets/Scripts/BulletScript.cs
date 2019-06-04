@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     private Rigidbody2D rb2d;
-    public float bulletSpeed = 175.0f;
+    public float bulletSpeed = 300.0f;
     public float bulletDamage = 1.0f;
 
     void Awake()
@@ -18,14 +18,14 @@ public class BulletScript : MonoBehaviour
     {
         if (hitInfo.gameObject.tag == "Enemy00")
         {
-            Debug.Log("Hit Enemy");
+            // Debug.Log("Hit Enemy");
             Destroy(gameObject);
             Enemy00Script enemy = hitInfo.GetComponent<Enemy00Script>();
             enemy.GetDamaged(bulletDamage);
         }
         if (hitInfo.gameObject.tag == "StageWall")
         {
-            Debug.Log("Hit Wall");
+            // Debug.Log("Hit Wall");
             Destroy(gameObject);
         }
     }
@@ -34,14 +34,14 @@ public class BulletScript : MonoBehaviour
     {
         if (hitInfo.gameObject.tag == "Enemy00")
         {
-            Debug.Log("Hit Enemy inside");
+            // Debug.Log("Hit Enemy inside");
             Destroy(gameObject);
             Enemy00Script enemy = hitInfo.GetComponent<Enemy00Script>();
             enemy.GetDamaged(bulletDamage);
         }
         if (hitInfo.gameObject.tag == "StageWall")
         {
-            Debug.Log("Hit Wall");
+            // Debug.Log("Hit Wall");
             Destroy(gameObject);
         }
     }

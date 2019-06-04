@@ -15,7 +15,7 @@ public class EnemySpawnScript : MonoBehaviour
     public int maxEnemiesAlive = 10;
     private Vector3 enemy01Offset;
     public bool isGameOver;
-    public float entryTime = 2.0f;
+    public float entryTime = 1.5f;
 
     public int group1 = 0;
     public int group2 = 0;
@@ -80,17 +80,17 @@ public class EnemySpawnScript : MonoBehaviour
             {
                 newEnemy.GetComponent<EnemyScript>().group = 1;
                 group1++;
-                Debug.Log("Group 1: " + group1);
+                // Debug.Log("Group 1: " + group1);
             } else if (randSpawnLoc >=3 && randSpawnLoc <= 5)
             {
                 newEnemy.GetComponent<EnemyScript>().group = 2;
                 group2++;
-                Debug.Log("Group 2: " + group2);
+                // Debug.Log("Group 2: " + group2);
             } else if (randSpawnLoc >= 6)
             {
                 newEnemy.GetComponent<EnemyScript>().group = 3;
                 group3++;
-                Debug.Log("Group 3: " + group3);
+                // Debug.Log("Group 3: " + group3);
             }
         }
     }
@@ -110,11 +110,10 @@ public class EnemySpawnScript : MonoBehaviour
             {
                 return rand;
             } else {
-                Debug.Log("reRandomize");
+                // Debug.Log("reRandomize");
             }
         }
     }
-
 
     private void GetEnemiesAlive()
     {
@@ -165,7 +164,7 @@ public class EnemySpawnScript : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            Debug.Log("Destroy");
+            // Debug.Log("Destroy");
             child.gameObject.GetComponent<Enemy00Script>().GetDamaged(damageDealt);
             // Destroy(child.gameObject);
         }

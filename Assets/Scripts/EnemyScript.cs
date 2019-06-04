@@ -80,7 +80,7 @@ public abstract class EnemyScript : MonoBehaviour
         bar.enabled = true;
         if (currentHealth <= 0)
         {
-            Debug.Log("Enemy destroyed");
+            // Debug.Log("Enemy destroyed");
             Instantiate(item, transform.position, Quaternion.identity);
             if (group == 1)
             {

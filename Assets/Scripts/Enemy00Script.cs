@@ -5,11 +5,6 @@ using UnityEngine;
 public class Enemy00Script : EnemyScript
 {
     private float currentPatrolTime;
-    // Update is called once per frame
-    void Awake()
-    {
-        // patrolSpeed = UnityEngine.Random.Range(patrolSpeedMin, patrolSpeedMax);
-    }
     
     void Update()
     {
