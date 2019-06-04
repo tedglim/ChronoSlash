@@ -8,3 +8,5 @@ It features the following:
 * A playable character that can Run, Jump, shoot, and has a chargeable ability to destroy all enemies.
 * Scoring System and replayablity
 * FX with Unity particle system
+
+can be played here: https://simmer.io/@demastte/livin
