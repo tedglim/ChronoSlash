@@ -112,11 +112,11 @@ public class PlayerScript : MonoBehaviour
 
     private void CheckDashJump()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && currStageLevel < stageLevelMax)
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && currStageLevel < stageLevelMax)
         {
             canDashJumpUp = true;
             currStageLevel++;
-        } else if (Input.GetKeyDown(KeyCode.DownArrow) && currStageLevel > stageLevelMin) 
+        } else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && currStageLevel > stageLevelMin) 
         {
             canDashJumpDown = true;
             currStageLevel--;
