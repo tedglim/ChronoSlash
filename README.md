@@ -1,6 +1,8 @@
 # ChronoSlash
 2D Web Game
 </br>
+![](ChronoSlash.gif)
+</br>
 This is a 2D Action Platformer made in Unity.
 </br>
 It features the following:
