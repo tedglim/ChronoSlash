@@ -18,14 +18,12 @@ public class BulletScript : MonoBehaviour
     {
         if (hitInfo.gameObject.tag == "Enemy00")
         {
-            // Debug.Log("Hit Enemy");
             Destroy(gameObject);
             Enemy00Script enemy = hitInfo.GetComponent<Enemy00Script>();
             enemy.GetDamaged(bulletDamage);
         }
         if (hitInfo.gameObject.tag == "StageWall")
         {
-            // Debug.Log("Hit Wall");
             Destroy(gameObject);
         }
     }
@@ -34,14 +32,12 @@ public class BulletScript : MonoBehaviour
     {
         if (hitInfo.gameObject.tag == "Enemy00")
         {
-            // Debug.Log("Hit Enemy inside");
             Destroy(gameObject);
             Enemy00Script enemy = hitInfo.GetComponent<Enemy00Script>();
             enemy.GetDamaged(bulletDamage);
         }
         if (hitInfo.gameObject.tag == "StageWall")
         {
-            // Debug.Log("Hit Wall");
             Destroy(gameObject);
         }
     }

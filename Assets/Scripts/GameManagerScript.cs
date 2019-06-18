@@ -32,7 +32,6 @@ public class GameManagerScript : MonoBehaviour
         enemySpawnScript = spawner.GetComponent<EnemySpawnScript>();
         GameObject player = GameObject.Find("Player");
         playerScript = player.GetComponent<PlayerScript>();
-
         score = 0;
     }
 
@@ -47,10 +46,8 @@ public class GameManagerScript : MonoBehaviour
 
     public void ManagePlayerHealth(float currHealth, float totalHealth)
     {
-        Debug.Log("current Health: " + currHealth);
         if (currHealth <= 0)
         {
-            // Debug.Log("DEAD");
             GameOver();
         }
         hpBar.fillAmount = currHealth / totalHealth;

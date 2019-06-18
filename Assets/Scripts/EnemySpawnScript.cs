@@ -187,15 +187,12 @@ public class EnemySpawnScript : MonoBehaviour
             if (randSpawnLoc <= group1)
             {
                 newEnemy.GetComponent<EnemyScript>().group = 1;
-                // Debug.Log("Group 1: " + group1);
             } else if (randSpawnLoc > group1 && randSpawnLoc <= group2)
             {
                 newEnemy.GetComponent<EnemyScript>().group = 2;
-                // Debug.Log("Group 2: " + group2);
             } else if (randSpawnLoc > group2 && randSpawnLoc <= group3)
             {
                 newEnemy.GetComponent<EnemyScript>().group = 3;
-                // Debug.Log("Group 3: " + group3);
             }
         }
         yield return new WaitForSeconds(0.1f);
@@ -267,9 +264,7 @@ public class EnemySpawnScript : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            // Debug.Log("Destroy");
             child.gameObject.GetComponent<Enemy00Script>().GetDamaged(damageDealt);
-            // Destroy(child.gameObject);
         }
         group1Count = 0;
         group2Count = 0;

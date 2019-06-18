@@ -156,7 +156,8 @@ public class PlayerScript : MonoBehaviour
     {
         prevScoreForAbility += scoreForAbility;
         currAbilityAmount = gameManagerScript.score - prevScoreForAbility;
-        canUseAbilityTime = useAbilityDuration;    }
+        canUseAbilityTime = useAbilityDuration;
+    }
 
     void FixedUpdate()
     {
@@ -222,20 +223,17 @@ public class PlayerScript : MonoBehaviour
     {
         if (hit.gameObject.tag == "StageWall")
         {
-            // Debug.Log("Hit Wall");
             rb2d.velocity = Vector2.zero;
             canRun=false;
         }
         if (hit.gameObject.tag == "Enemy00")
         {
-            // Debug.Log("Hit Enemy");
             Enemy00Script enemy = hit.GetComponent<Enemy00Script>();
             TakeDamage(enemy.damageDealt);
             enemy.GetDamaged(playerDamage);
         }
         if (hit.gameObject.tag == "Item")
         {
-            // Debug.Log("Hit Item");
             ItemScript item = hit.GetComponent<ItemScript>();
             gameManagerScript.AddScore(item.value);
             item.GetDestroyed();
@@ -246,6 +244,6 @@ public class PlayerScript : MonoBehaviour
     {
         currentHealth -= damageTaken;
         gameManagerScript.ManagePlayerHealth(currentHealth, startingHealth);
-        CameraShaker.Instance.ShakeOnce(2f, 2f, .1f, .5f);
+        CameraShaker.Instance.ShakeOnce(2f, 2f, .1f, .4f);
     }
 }
