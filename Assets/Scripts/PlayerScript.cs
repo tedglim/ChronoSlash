@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EZCameraShake;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -75,6 +76,10 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isGameOver)
+        {
+            return;
+        }
         CheckRun();
         CheckDashJump();
         CheckBlast();
@@ -172,6 +177,8 @@ public class PlayerScript : MonoBehaviour
                 Run();
                 Shoot();
             }
+        } else {
+            return;
         }
     }
 
@@ -239,5 +246,6 @@ public class PlayerScript : MonoBehaviour
     {
         currentHealth -= damageTaken;
         gameManagerScript.ManagePlayerHealth(currentHealth, startingHealth);
+        CameraShaker.Instance.ShakeOnce(2f, 2f, .1f, .5f);
     }
 }

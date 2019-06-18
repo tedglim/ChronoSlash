@@ -1024,6 +1024,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1039,6 +1040,22 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab8353b5ebd32545867da143199a814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultPosInfluence: {x: 0.15, y: 0.15, z: 0.15}
+  DefaultRotInfluence: {x: 1, y: 1, z: 1}
+  RestPositionOffset: {x: 0, y: 0, z: 0}
+  RestRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -3271,14 +3288,31 @@ MonoBehaviour:
   initSpawnNum: 2
   enemyTypes:
   - {fileID: 2639806094303926389, guid: d66b94aa8d642485b80ce8ed713fe546, type: 3}
+  - {fileID: 3611104804578678219, guid: cbc7202b67f10422e91c6ed13dd10d9a, type: 3}
   - {fileID: 7224065578926072281, guid: 02a824e3b2ac9448c9ae8d4e6cde378a, type: 3}
   enemyEntryTypes:
   - {fileID: 1199655555294366351, guid: 55814e4ed8753417b9994338ca890245, type: 3}
+  - {fileID: 4535114047643367614, guid: 8a71e9de3f9fd46d28b1259ebd89549e, type: 3}
   - {fileID: 7123292188882032828, guid: 4bfb28519afb9454a9fbf5dd40361525, type: 3}
-  spawnIntervalDuration: 2
-  maxEnemiesAlive: 10
+  spawnIntervalDuration: 1.5
+  maxEnemiesAlive: 9
   isGameOver: 0
   entryTime: 1.5
+  group1Count: 0
+  group2Count: 0
+  group3Count: 0
+  spawnPhase1Start: 5
+  spawnPhase1End: 65
+  spawnPhase2Start: 65
+  spawnPhase2End: 80
+  spawnPhase3Start: 80
+  enemyPhase1Start: 15
+  enemyPhase1End: 30
+  enemyPhase2Start: 30
+  enemyPhase2End: 65
+  enemyPhase3Start: 65
+  enemyPhase3End: 120
+  enemyPhase4Start: 120
 --- !u!4 &595162700966468395
 Transform:
   m_ObjectHideFlags: 0

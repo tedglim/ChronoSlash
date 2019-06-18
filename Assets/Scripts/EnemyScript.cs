@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EZCameraShake;
 
 public abstract class EnemyScript : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public abstract class EnemyScript : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        GameObject enemySpawner = GameObject.Find("EnemySpawner");
+        enemySpawnScript = enemySpawner.GetComponent<EnemySpawnScript>();
         InitDirection();
         patrolSpeed = UnityEngine.Random.Range(patrolSpeedMin, patrolSpeedMax);
         patrolDuration = UnityEngine.Random.Range(patrolDurationMin, patrolDurationMax);
@@ -40,8 +43,7 @@ public abstract class EnemyScript : MonoBehaviour
         hp.enabled = false;
         bar.enabled = false;
 
-        GameObject enemySpawner = GameObject.Find("EnemySpawner");
-        enemySpawnScript = enemySpawner.GetComponent<EnemySpawnScript>();
+
     }
 
     protected virtual void InitDirection()
@@ -84,15 +86,16 @@ public abstract class EnemyScript : MonoBehaviour
             Instantiate(item, transform.position, Quaternion.identity);
             if (group == 1)
             {
-                enemySpawnScript.group1--;
+                enemySpawnScript.group1Count--;
             } else if (group == 2)
             {
-                enemySpawnScript.group2--;
+                enemySpawnScript.group2Count--;
             } else if (group == 3)
             {
-                enemySpawnScript.group3--;
+                enemySpawnScript.group3Count--;
             }
             Destroy(gameObject);
+            CameraShaker.Instance.ShakeOnce(1.5f, 1.5f, .1f, .25f);
         }
     }
 }
