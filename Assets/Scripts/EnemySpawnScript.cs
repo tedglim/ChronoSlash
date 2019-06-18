@@ -196,6 +196,13 @@ public class EnemySpawnScript : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(0.1f);
+        if (gameManagerScript.score >= 150 && gameManagerScript.score < 200)
+        {
+            spawnIntervalDuration = 1.0f;
+        } else if (gameManagerScript.score >= 200)
+        {
+            spawnIntervalDuration = 0.75f;
+        }
         currentSpawnTime = spawnIntervalDuration;
         isSpawning=false;
     }

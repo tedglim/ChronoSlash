@@ -81,13 +81,13 @@ public abstract class EnemyScript : MonoBehaviour
         if (currentHealth <= 0)
         {
             Instantiate(item, transform.position, Quaternion.identity);
-            if (group == 1)
+            if (group == 1 && enemySpawnScript.group1Count > 0)
             {
                 enemySpawnScript.group1Count--;
-            } else if (group == 2)
+            } else if (group == 2 && enemySpawnScript.group2Count > 0)
             {
                 enemySpawnScript.group2Count--;
-            } else if (group == 3)
+            } else if (group == 3 && enemySpawnScript.group3Count > 0)
             {
                 enemySpawnScript.group3Count--;
             }
